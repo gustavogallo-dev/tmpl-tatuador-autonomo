@@ -1,16 +1,15 @@
 ---
+import Layout from "../layouts/Layout.astro";
+import { site } from "../data/site";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout>
+  <main class="min-h-screen flex flex-col items-center justify-center gap-4 p-6 text-center">
+    <h1 class="text-5xl font-semibold">{site.nome}</h1>
+    <p class="text-lg opacity-80">{site.estilo} · {site.cidade}</p>
+    <!-- style="..." = CSS direto, usado aqui porque a cor vem de uma variável -->
+    <a class="rounded-full px-6 py-3 font-semibold text-black" style="background: var(--cor-destaque)" href="#">
+      Pedir orçamento
+    </a>
+  </main>
+</Layout>

@@ -1,0 +1,47 @@
+---
+import "../styles/global.css";
+import { site } from "../data/site";   // traz a "ficha do cliente" para dentro do Layout
+
+// Props opcionais: cada página pode mandar o próprio título/descrição.
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+// Se a página não mandar nada, usa o valor padrão depois do "=".
+// Crases `...` + ${} = template string (texto com variáveis dentro).
+const {
+  title = `${site.nome} | Tatuador em ${site.cidade}`,
+  description = site.descricao,
+} = Astro.props;
+
+// 1) CSS VARIABLES: transforma as cores/fontes do site.ts em variáveis CSS.
+//    É o que liga o site.ts ao CSS (como o :root que você comparou).
+const vars = `--cor-fundo:${site.cores.fundo};--cor-texto:${site.cores.texto};--cor-destaque:${site.cores.destaque};--fonte-titulo:'${site.fontes.titulo}';--fonte-texto:'${site.fontes.texto}';`;
+
+// 2) LINK DAS FONTES: monta a URL do Google Fonts automaticamente.
+//    [a, b].map(...)  → faz algo em cada item da lista e devolve uma lista nova
+//    .replace(/ /g, "+") → troca TODOS os espaços por "+" ("Cormorant Garamond" vira "Cormorant+Garamond")
+//    .join("&") → junta os itens da lista em um texto só, separados por "&"
+const familias = [site.fontes.titulo, site.fontes.texto]
+  .map((f) => `family=${f.replace(/ /g, "+")}:wght@400;500;600;700`)
+  .join("&");
+const fontesUrl = `https://fonts.googleapis.com/css2?${familias}&display=swap`;
+---
+
+<!doctype html>
+<!-- style={vars}: chaves SEM aspas = valor vem do frontmatter. Aplica as variáveis no <html>. -->
+<html lang="pt-BR" style={vars}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href={fontesUrl} rel="stylesheet" />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

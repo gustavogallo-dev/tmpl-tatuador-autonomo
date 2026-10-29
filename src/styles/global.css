@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+/* var(--nome) lê a variável CSS criada pelo Layout. 
+   Se o Layout não definir, o valor depois da vírgula é o "plano B". */
+body {
+  background: var(--cor-fundo);
+  color: var(--cor-texto);
+  font-family: var(--fonte-texto), system-ui, sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--fonte-titulo), serif;
+}
