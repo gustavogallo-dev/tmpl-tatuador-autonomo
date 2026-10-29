@@ -1,15 +1,27 @@
 @import "tailwindcss";
 
-/* var(--nome) lê a variável CSS criada pelo Layout. 
-   Se o Layout não definir, o valor depois da vírgula é o "plano B". */
+/* @theme "cadastra" valores no Tailwind e gera classes a partir deles.
+   O PREFIXO do nome decide o tipo de classe:
+     --color-destaque → gera bg-destaque, text-destaque, border-destaque...
+     --font-titulo    → gera font-titulo
+   "inline" = a classe usa var(--cor-destaque) direto. Precisamos disso porque
+   o valor real vem do Layout (que leu o site.ts). */
+@theme inline {
+  --color-fundo: var(--cor-fundo);
+  --color-texto: var(--cor-texto);
+  --color-destaque: var(--cor-destaque);
+
+  --font-titulo: var(--fonte-titulo), serif;
+  --font-corpo: var(--fonte-texto), system-ui, sans-serif;
+}
+
+/* @apply "cola" classes do Tailwind dentro de uma regra CSS normal. */
 body {
-  background: var(--cor-fundo);
-  color: var(--cor-texto);
-  font-family: var(--fonte-texto), system-ui, sans-serif;
+  @apply bg-fundo text-texto font-corpo;
 }
 
 h1,
 h2,
 h3 {
-  font-family: var(--fonte-titulo), serif;
+  @apply font-titulo;
 }

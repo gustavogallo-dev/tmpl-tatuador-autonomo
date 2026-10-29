@@ -14,6 +14,16 @@ export const site = {
   mensagemWhatsapp: "Olá! Quero fazer um orçamento de tatuagem.",
   instagram: "https://instagram.com/seuusuario",
 
+  heroIMG: "/fotos/hero.jpg",
+  heroAlt: "Foto do tatuador trabalhando em uma tatuagem",
+
+  // Textos do Hero: mudam de cliente para cliente, por isso ficam aqui.
+  heroTitulo: "Arte fina, feita para durar na pele",
+  heroSubtitulo:
+    "Tatuagens autorais em fineline e blackwork. Cada traço é pensado com você, do conceito à cicatrização.",
+  
+    heroCTA: "Pedir orçamento",
+
   cores: {
     fundo: "#1C1C1E",
     texto: "#F2F2F7",

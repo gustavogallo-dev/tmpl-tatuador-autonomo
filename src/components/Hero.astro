@@ -1,0 +1,55 @@
+---
+// Um componente tem a mesma estrutura de uma página: frontmatter + template.
+// A diferença: NÃO tem <html>, <head> nem <body>. Isso é papel do Layout.
+import { site } from "../data/site";
+---
+
+<!--
+  <section> = bloco de conteúdo com um tema (aqui, a abertura da página).
+  Classes Tailwind:
+    relative        → vira a "referência" para os filhos que usam absolute
+    flex items-center justify-center → centraliza o conteúdo (horizontal e vertical)
+    min-h-screen    → altura mínima = 100% da altura da tela
+    overflow-hidden → corta o que passar das bordas da seção
+-->
+<section class="relative flex min-h-screen items-center justify-center overflow-hidden">
+
+  <!--
+    A foto como <img> (e não como background-image) porque:
+    tem alt (acessibilidade e SEO) e o navegador consegue otimizar o carregamento.
+    absolute inset-0 → cola a imagem nas 4 bordas da seção (top/right/bottom/left = 0)
+    h-full w-full    → ocupa 100% da altura e largura
+    object-cover     → preenche a área sem deformar a foto (corta o excesso)
+  -->
+  <img
+    src={site.heroIMG}
+    alt={site.heroAlt}
+    class="absolute inset-0 h-full w-full object-cover"
+  />
+
+  <div class="absolute inset-0 bg-black/55"></div>
+
+  <div class="relative z-10 mx-auto max-w-3xl px-6 text-center">
+
+  <p class="mb-4 text-sm tracking-[0.3em] text-destaque uppercase">
+    {site.estilo} · {site.cidade}
+  </p>
+
+  <h1 class="text-4xl leading-tight font-semibold md:text-6xl lg:text-7xl">
+    {site.heroTitulo}
+  </h1>
+
+  <p class="mx-auto mt-6 max-w-xl text-base text-texto/80 md:text-lg">
+    {site.heroSubtitulo}
+  </p>
+  <a
+  href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent(site.mensagemWhatsapp)}`}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="group mt-10 inline-flex items-center gap-3 rounded-full bg-destaque px-8 py-4 text-sm font-semibold tracking-widest text-fundo uppercase transition duration-300 ease-out hover:-translate-y-1 hover:brightness-110 hover:shadow-xl hover:shadow-destaque/40 active:translate-y-0 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-destaque"
+>
+  {site.heroCTA}
+  <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
+</a>
+</div>
+</section>

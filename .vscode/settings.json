@@ -1,0 +1,5 @@
+{
+  // O linter nativo do VS Code não conhece @theme/@apply (são do Tailwind).
+  // "ignore" = não avisar sobre regras desconhecidas neste projeto.
+  "css.lint.unknownAtRules": "ignore"
+}
